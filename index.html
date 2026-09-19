@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lancmall OPC Training Quiz - Day 1</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -922,7 +923,6 @@
         </div>
       </div>
       <div class="result-actions">
-        <button class="action-btn primary" id="submitGithubBtn" onclick="submitToGithub()">📤 Submit Score to Admin</button>
         <button class="action-btn secondary" id="copyBtn" onclick="copyResult()">Copy Result</button>
         <button class="action-btn secondary" id="viewAnswersBtn" onclick="showAllAnswers()">View All Explanations</button>
         <button class="action-btn secondary" id="restartBtn" onclick="restartQuiz()">Retake Quiz</button>
@@ -982,7 +982,6 @@ const i18n = {
     statWrong: "Wrong",
     statAccuracy: "Accuracy",
     statDuration: "Duration",
-    submitGithubBtn: "📤 Submit Score to Admin",
     copyBtn: "Copy Result",
     viewAnswersBtn: "View All Explanations",
     restartBtn: "Retake Quiz",
@@ -1126,7 +1125,6 @@ const i18n = {
     statWrong: "答错",
     statAccuracy: "正确率",
     statDuration: "用时",
-    submitGithubBtn: "📤 提交成绩到后台",
     copyBtn: "复制成绩",
     viewAnswersBtn: "查看全部解析",
     restartBtn: "重新测试",
@@ -2562,13 +2560,10 @@ const QUIZ_PASSWORDS = {
   final: 'opc-final'
 };
 
-// GitHub API Config
-const GITHUB_CONFIG = {
-  token: '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',
-  owner: 'lancmall',
-  repo: 'Training-OPC',
-  branch: 'main'
-};
+// Supabase Config
+const SUPABASE_URL = 'https://qvvwzyhngpqjmurlyjdtw.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_Ox7fOMiHrhMzlw1QFyHyFQ_eS60XW3j';
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Load saved passwords from localStorage
 try {
@@ -2699,7 +2694,6 @@ function switchLang(lang) {
   document.getElementById('statWrong').textContent = t.statWrong;
   document.getElementById('statAccuracy').textContent = t.statAccuracy;
   document.getElementById('statDuration').textContent = t.statDuration;
-  document.getElementById('submitGithubBtn').textContent = t.submitGithubBtn;
   document.getElementById('copyBtn').textContent = t.copyBtn;
   document.getElementById('viewAnswersBtn').textContent = t.viewAnswersBtn;
   document.getElementById('restartBtn').textContent = t.restartBtn;
@@ -3072,8 +3066,8 @@ function doSubmit() {
   const userId = document.getElementById('userId').value.trim();
   saveResult(userId, earnedScore, correctCount, wrongCount, accuracy, duration, answerDetails, moduleStats);
   
-  // Upload result to GitHub
-  uploadResultToGithub(userId, earnedScore, correctCount, wrongCount, accuracy, duration, answerDetails, moduleStats);
+  // Upload result to Supabase
+  uploadResultToSupabase(userId, earnedScore, correctCount, wrongCount, accuracy, duration, answerDetails, moduleStats);
   
   // Show result
   quizSubmitted = true;
@@ -3173,47 +3167,8 @@ function showResults() {
   });
 }
 
-// ==================== Submit to GitHub Issues ====================
-function submitToGithub() {
-  const userId = document.getElementById('userIdInput').value.trim();
-  const score = document.getElementById('scoreNumber').textContent;
-  const correctCount = document.getElementById('correctCount').textContent;
-  const wrongCount = document.getElementById('wrongCount').textContent;
-  const accuracy = document.getElementById('accuracyRate').textContent;
-  const duration = document.getElementById('durationTime').textContent;
-  
-  const quizNames = {
-    day1: 'Day 1 Quiz',
-    day2: 'Day 2 Quiz',
-    day3: 'Day 3 Quiz',
-    final: 'Final Exam'
-  };
-  const quizName = quizNames[currentQuiz] || currentQuiz;
-  
-  // Build issue title
-  const title = `[${quizName}] ${userId} - Score: ${score}/100`;
-  
-  // Build issue body
-  let body = `## Test Result\n\n`;
-  body += `- **Shipping Mark / 唛头:** ${userId}\n`;
-  body += `- **Quiz / 试卷:** ${quizName}\n`;
-  body += `- **Score / 分数:** ${score}/100\n`;
-  body += `- **Correct / 答对:** ${correctCount}\n`;
-  body += `- **Wrong / 答错:** ${wrongCount}\n`;
-  body += `- **Accuracy / 正确率:** ${accuracy}\n`;
-  body += `- **Duration / 用时:** ${duration}\n`;
-  body += `- **Date / 时间:** ${new Date().toLocaleString()}\n\n`;
-  body += `---\n*Submitted via Lancmall OPC Training Quiz System*`;
-  
-  // Construct GitHub Issues URL
-  const githubUrl = `https://github.com/lancmall/Training-OPC/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
-  
-  // Open in new window
-  window.open(githubUrl, '_blank');
-}
-
-// ==================== Upload Result to GitHub ====================
-async function uploadResultToGithub(userId, score, correct, wrong, accuracy, duration, answerDetails, moduleStats) {
+// ==================== Upload Result to Supabase ====================
+async function uploadResultToSupabase(userId, score, correct, wrong, accuracy, duration, answerDetails, moduleStats) {
   try {
     const quizNames = {
       day1: 'Day 1 Quiz',
@@ -3223,52 +3178,28 @@ async function uploadResultToGithub(userId, score, correct, wrong, accuracy, dur
     };
     const quizName = quizNames[currentQuiz] || currentQuiz;
     
-    // Build result data
-    const resultData = {
-      shippingMark: userId,
-      quizId: currentQuiz,
-      quizName: quizName,
-      score: score,
-      correct: correct,
-      wrong: wrong,
-      accuracy: accuracy,
-      duration: duration,
-      submitTime: new Date().toISOString(),
-      answerDetails: answerDetails,
-      moduleStats: moduleStats
-    };
+    const { data, error } = await supabaseClient
+      .from('quiz_results')
+      .insert([{
+        shipping_mark: userId,
+        quiz_id: currentQuiz,
+        quiz_name: quizName,
+        score: score,
+        correct_count: correct,
+        wrong_count: wrong,
+        accuracy: accuracy,
+        duration: duration,
+        answer_details: answerDetails,
+        module_stats: moduleStats
+      }]);
     
-    // File path: results/{mark}_{quiz}_{timestamp}.json
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const filePath = `results/${userId}_${currentQuiz}_${timestamp}.json`;
-    
-    // Encode content to base64
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(resultData, null, 2))));
-    
-    // GitHub API request
-    const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${filePath}`;
-    
-    const response = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `token ${GITHUB_CONFIG.token}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        message: `New result: ${userId} - ${quizName} - ${score}/100`,
-        content: content,
-        branch: GITHUB_CONFIG.branch
-      })
-    });
-    
-    if (response.ok) {
-      console.log('Result uploaded to GitHub successfully');
+    if (error) {
+      console.error('Error uploading result to Supabase:', error);
     } else {
-      console.error('Failed to upload result to GitHub:', response.status, response.statusText);
+      console.log('Result uploaded to Supabase successfully:', data);
     }
   } catch (error) {
-    console.error('Error uploading result to GitHub:', error);
+    console.error('Exception uploading result to Supabase:', error);
   }
 }
 
@@ -3367,9 +3298,45 @@ function adminLogin() {
   if (password === ADMIN_PASSWORD) {
     document.getElementById('adminLogin').style.display = 'none';
     document.getElementById('adminDashboard').style.display = 'block';
-    renderAdminDashboard();
+    loadResultsFromSupabase();
   } else {
     document.getElementById('adminError').classList.add('show');
+  }
+}
+
+// Load results from Supabase
+async function loadResultsFromSupabase() {
+  try {
+    const { data, error } = await supabaseClient
+      .from('quiz_results')
+      .select('*')
+      .order('created_at', { ascending: false });
+    
+    if (error) {
+      console.error('Error loading results from Supabase:', error);
+      // Fallback to localStorage
+      renderAdminDashboard(JSON.parse(localStorage.getItem('opc_quiz_results') || '[]'));
+      return;
+    }
+    
+    // Convert Supabase data to match localStorage format
+    const results = data.map(r => ({
+      id: r.shipping_mark,
+      quizId: r.quiz_id,
+      score: r.score,
+      correct: r.correct_count,
+      wrong: r.wrong_count,
+      accuracy: r.accuracy,
+      duration: r.duration,
+      timestamp: r.created_at,
+      answerDetails: r.answer_details,
+      moduleStats: r.module_stats
+    }));
+    
+    renderAdminDashboard(results);
+  } catch (error) {
+    console.error('Exception loading results:', error);
+    renderAdminDashboard(JSON.parse(localStorage.getItem('opc_quiz_results') || '[]'));
   }
 }
 
@@ -3378,9 +3345,9 @@ function backToQuiz() {
   document.getElementById('quizView').style.display = 'block';
 }
 
-function renderAdminDashboard() {
+function renderAdminDashboard(results) {
   const t = i18n[currentLang];
-  const results = JSON.parse(localStorage.getItem('opc_quiz_results') || '[]');
+  results = results || JSON.parse(localStorage.getItem('opc_quiz_results') || '[]');
   
   // Group by user ID, keep latest score for each quiz
   const userScores = {};
