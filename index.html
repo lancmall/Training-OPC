@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lancmall OPC Training Quiz - Day 1</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -2563,7 +2562,6 @@ const QUIZ_PASSWORDS = {
 // Supabase Config
 const SUPABASE_URL = 'https://qvvwzyhngpqjmurlyjdtw.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_Ox7fOMiHrhMzlw1QFyHyFQ_eS60XW3j';
-const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Load saved passwords from localStorage
 try {
@@ -3178,9 +3176,15 @@ async function uploadResultToSupabase(userId, score, correct, wrong, accuracy, d
     };
     const quizName = quizNames[currentQuiz] || currentQuiz;
     
-    const { data, error } = await supabaseClient
-      .from('quiz_results')
-      .insert([{
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/quiz_results`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
         shipping_mark: userId,
         quiz_id: currentQuiz,
         quiz_name: quizName,
@@ -3191,17 +3195,21 @@ async function uploadResultToSupabase(userId, score, correct, wrong, accuracy, d
         duration: duration,
         answer_details: answerDetails,
         module_stats: moduleStats
-      }]);
+      })
+    });
     
-    if (error) {
-      console.error('Error uploading result to Supabase:', error);
-      alert('Upload failed: ' + error.message);
-    } else {
-      console.log('Result uploaded to Supabase successfully:', data);
-      alert('Score uploaded successfully!');
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Supabase upload error:', response.status, errorText);
+      alert('Upload failed: ' + response.status + ' ' + errorText);
+      return;
     }
+    
+    console.log('Result uploaded to Supabase successfully');
+    alert('Score uploaded successfully!');
   } catch (error) {
-    console.error('Exception uploading result to Supabase:', error);
+    console.error('Exception uploading to Supabase:', error);
+    alert('Upload error: ' + error.message);
   }
 }
 
@@ -3309,17 +3317,23 @@ function adminLogin() {
 // Load results from Supabase
 async function loadResultsFromSupabase() {
   try {
-    const { data, error } = await supabaseClient
-      .from('quiz_results')
-      .select('*')
-      .order('created_at', { ascending: false });
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/quiz_results?select=*&order=created_at.desc`, {
+      method: 'GET',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json'
+      }
+    });
     
-    if (error) {
-      console.error('Error loading results from Supabase:', error);
-      // Fallback to localStorage
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Supabase load error:', response.status, errorText);
       renderAdminDashboard(JSON.parse(localStorage.getItem('opc_quiz_results') || '[]'));
       return;
     }
+    
+    const data = await response.json();
     
     // Convert Supabase data to match localStorage format
     const results = data.map(r => ({
