@@ -2564,6 +2564,8 @@ const SUPABASE_URL = 'https://qvvwzyhngpqjmurlyjdtw.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_Ox7fOMiHrhMzlw1QFyHyFQ_eS60XW3j';
 
 // Load saved passwords from localStorage
+// Reset to default passwords for testing
+localStorage.removeItem('opc_quiz_passwords');
 try {
   const savedPwds = localStorage.getItem('opc_quiz_passwords');
   if (savedPwds) {
