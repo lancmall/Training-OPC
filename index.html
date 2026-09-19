@@ -3195,8 +3195,10 @@ async function uploadResultToSupabase(userId, score, correct, wrong, accuracy, d
     
     if (error) {
       console.error('Error uploading result to Supabase:', error);
+      alert('Upload failed: ' + error.message);
     } else {
       console.log('Result uploaded to Supabase successfully:', data);
+      alert('Score uploaded successfully!');
     }
   } catch (error) {
     console.error('Exception uploading result to Supabase:', error);
