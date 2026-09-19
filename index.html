@@ -2532,7 +2532,618 @@ day3: [
     }
   }
   ],
-  final: []
+  final: [
+    // ===== 单选题 1-20 =====
+    {
+      type: 'single',
+      question: {
+        en: "What is the format of an OPC shipping mark?",
+        zh: "OPC的唛头格式是？"
+      },
+      options: [
+        { en: "Any letters + numbers", zh: "任意字母+数字" },
+        { en: "1 uppercase letter + 5-8 digits", zh: "1个大写字母+5-8个数字" },
+        { en: "Pure numbers", zh: "纯数字" },
+        { en: "Any format", zh: "任意格式" }
+      ],
+      answer: 1,
+      score: 3,
+      explanation: {
+        en: "Shipping mark format is 1 uppercase letter + 5-8 digits, used to uniquely identify each OPC client.",
+        zh: "唛头格式为1个大写字母+5-8个数字，用于唯一标识每个OPC客户。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "Which of the following fees is NOT included in the PO purchase order?",
+        zh: "PO采购订单中不包含以下哪项费用？"
+      },
+      options: [
+        { en: "Product price", zh: "商品价格" },
+        { en: "Domestic shipping from supplier to China warehouse", zh: "供应商到中国仓库的运费" },
+        { en: "Service fee", zh: "服务费" },
+        { en: "International shipping fee", zh: "国际运输费" }
+      ],
+      answer: 3,
+      score: 3,
+      explanation: {
+        en: "PO includes product price, domestic shipping (supplier → China warehouse), and service fee. International shipping is not included and needs to be paid separately.",
+        zh: "PO订单包含商品价格、国内运费（供应商→中国仓库）、服务费；国际运输费不包含在PO中，需要单独支付。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "How long does the OPC have to raise objections after receiving warehouse inspection photos?",
+        zh: "入库检验后，OPC需要在多长时间内对入库照片提出异议？"
+      },
+      options: [
+        { en: "24 hours", zh: "24小时" },
+        { en: "48 hours", zh: "48小时" },
+        { en: "72 hours", zh: "72小时" },
+        { en: "1 week", zh: "一周" }
+      ],
+      answer: 1,
+      score: 3,
+      explanation: {
+        en: "If no objection is raised within 48 hours after warehouse inspection notice, it is deemed that the customer has confirmed the product style, quantity, appearance, color, etc. Issues found later are the OPC's own responsibility.",
+        zh: "入库信息发出后48小时内未提出异议，默认客户对商品款式、数量、外观、颜色等符合预期，后期问题由OPC自行承担。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "Which of the following products is considered bulky cargo (dimensional weight) with higher shipping costs?",
+        zh: "以下哪类商品属于泡货，运费成本较高？"
+      },
+      options: [
+        { en: "Metal hardware tools", zh: "金属五金工具" },
+        { en: "Jewelry", zh: "珠宝首饰" },
+        { en: "Storage boxes, diapers", zh: "收纳盒、纸尿裤" },
+        { en: "Mobile phone accessories", zh: "手机配件" }
+      ],
+      answer: 2,
+      score: 3,
+      explanation: {
+        en: "Storage boxes, bottles, diapers and similar products with large volume and light weight are considered dimensional weight cargo, and shipping cost is relatively high.",
+        zh: "收纳盒、瓶子、纸尿裤等体积大、重量轻的商品属于泡货，容易按体积计费，运输成本相对较高。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "Which of the following products is NOT recommended for active promotion?",
+        zh: "以下哪类商品不建议主动推广？"
+      },
+      options: [
+        { en: "Clothing accessories", zh: "服装配饰" },
+        { en: "Beauty products", zh: "美妆产品" },
+        { en: "Power banks over 12000mAh", zh: "充电宝（超过12000mAh）" },
+        { en: "Jewelry", zh: "珠宝首饰" }
+      ],
+      answer: 2,
+      score: 3,
+      explanation: {
+        en: "Power banks over 12000mAh are sensitive goods, require CCC certification, and are not suitable for air shipping. Not recommended for active promotion.",
+        zh: "充电宝超过12000mAh属于敏感货，需要CCC认证，且不方便空运，不建议主动推广。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "Which of the following is the correct supplier selection standard when purchasing?",
+        zh: "采购时，以下哪个是正确的供应商选择标准？"
+      },
+      options: [
+        { en: "The lower the price, the better", zh: "价格越低越好" },
+        { en: "Store rating ≥ 4, monthly sales > 1000", zh: "店铺评分≥4分，月销量＞1000" },
+        { en: "Only look at product images", zh: "只看图片好不好看" },
+        { en: "Any brand product is fine", zh: "只要是品牌就可以" }
+      ],
+      answer: 1,
+      score: 3,
+      explanation: {
+        en: "Choose products with certification, reasonable price, supplier rating over 4, and monthly sales > 1000. Brand products are sensitive goods and should not be promoted.",
+        zh: "应选择有认证、价格合理、供应商评分超过4分、月销量＞1000的商品；品牌是敏感货，不提倡。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "Why can't we only look at the purchase price when selecting products?",
+        zh: "选品时，为什么不能只看采购价？"
+      },
+      options: [
+        { en: "Because purchase price is not important", zh: "因为采购价不重要" },
+        { en: "Because we need to consider quality, average shipping per item, and market profit margin", zh: "因为还要看质量、平均每件运费、市场利润率等综合因素" },
+        { en: "Because suppliers will always raise prices", zh: "因为供应商都会涨价" },
+        { en: "Because purchase prices are fake", zh: "因为采购价都是假的" }
+      ],
+      answer: 1,
+      score: 3,
+      explanation: {
+        en: "When selecting products, don't only look at purchase price. Also consider: product quality stability, average shipping cost per item, local market price and profit margin, to judge if the product is worth doing.",
+        zh: "选品时不能只看采购价，还要综合考虑：商品质量是否稳定、平均每件商品的运费分摊、当地市场售价和利润率，才能判断这个品值不值得做。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "What is the main purpose of small batch trial purchases?",
+        zh: "小批量试采购的主要目的是？"
+      },
+      options: [
+        { en: "Save money", zh: "省钱" },
+        { en: "Verify product quality and supplier reliability, reduce trial-and-error cost", zh: "验证商品质量和供应商靠谱程度，降低试错成本" },
+        { en: "To ship by sea", zh: "为了走海运" },
+        { en: "To meet order minimums", zh: "为了凑单" }
+      ],
+      answer: 1,
+      score: 3,
+      explanation: {
+        en: "For new suppliers, it is recommended to start with a small trial order. Verify quality through warehouse inspection photos. If issues are found, goods can be returned at low cost. Only scale up after quality is confirmed.",
+        zh: "建议新供应商先小批量采购，通过入库检查照片验证质量，如果发现问题可以低价退回，试错成本低，确认质量后再加大采购量。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "What is the correct formula for ROAS?",
+        zh: "以下哪项是ROAS的正确计算公式？"
+      },
+      options: [
+        { en: "Ad spend ÷ Revenue from ads", zh: "广告花费 ÷ 广告带来的收入" },
+        { en: "Revenue from ads ÷ Ad spend", zh: "广告带来的收入 ÷ 广告花费" },
+        { en: "Ad clicks ÷ Ad impressions", zh: "广告点击量 ÷ 广告曝光量" },
+        { en: "Orders ÷ Leads", zh: "订单数 ÷ 线索数" }
+      ],
+      answer: 1,
+      score: 3,
+      explanation: {
+        en: "ROAS (Return on Ad Spend) = Revenue from ads ÷ Ad spend. Higher ROAS means better ad performance.",
+        zh: "ROAS（广告支出回报率）= 广告带来的收入 ÷ 广告花费，ROAS越高说明广告效果越好。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "What is the order conversion formula?",
+        zh: "订单转化的公式是？"
+      },
+      options: [
+        { en: "Leads × Conversion rate × Average order value = GMV", zh: "线索数 × 转化率 × 客单价 = GMV" },
+        { en: "Clicks × Conversion rate = Orders", zh: "点击量 × 转化率 = 订单数" },
+        { en: "Impressions × Click rate = Clicks", zh: "曝光量 × 点击率 = 点击量" },
+        { en: "None of the above", zh: "以上都不对" }
+      ],
+      answer: 0,
+      score: 3,
+      explanation: {
+        en: "Full order conversion funnel: Leads × Conversion rate × Average order value = GMV (Gross Merchandise Volume).",
+        zh: "订单转化全链路：线索数 × 转化率 × 客单价 = GMV（商品交易总额）。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "How quickly should OPC respond when a customer reports an after-sales issue?",
+        zh: "客户反馈售后问题后，OPC应该在多长时间内响应？"
+      },
+      options: [
+        { en: "Within 24 hours", zh: "24小时内" },
+        { en: "Within 48 hours", zh: "48小时内" },
+        { en: "Within 72 hours", zh: "72小时内" },
+        { en: "Within 1 week", zh: "一周内" }
+      ],
+      answer: 0,
+      score: 3,
+      explanation: {
+        en: "Basic after-sales principle: Customer issues must be responded to within 24 hours. First calm the customer down, then follow up on the issue.",
+        zh: "售后处理基本原则：客户反馈问题后必须在24小时内响应，先安抚客户情绪，再跟进问题处理。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "In which of the following cases can Lancmall NOT provide warehouse inspection service?",
+        zh: "以下哪种情况，Lancmall无法提供入库检验服务？"
+      },
+      options: [
+        { en: "Goods shipped to Lancmall China warehouse", zh: "商品发到Lancmall中国仓库" },
+        { en: "Supplier ships directly to customer's designated international logistics warehouse", zh: "供应商直接发货到客户指定的国际物流仓库" },
+        { en: "Goods shipped to Pakistan warehouse", zh: "商品发到巴基斯坦仓库" },
+        { en: "None of the above", zh: "以上都不对" }
+      ],
+      answer: 1,
+      score: 3,
+      explanation: {
+        en: "If the supplier ships directly to the customer's designated international logistics warehouse, the goods do not pass through Lancmall's China warehouse, so warehouse inspection service cannot be provided.",
+        zh: "如果供应商直接运输到客户指定的国际物流仓库，货物不经过Lancmall中国仓库，无法提供入库检验服务。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "Regarding OPC negotiating prices with suppliers, which of the following is correct?",
+        zh: "关于OPC与供应商沟通价格，以下说法正确的是？"
+      },
+      options: [
+        { en: "OPC can negotiate prices for customers", zh: "OPC可以帮客户谈价格" },
+        { en: "OPC does not proactively negotiate prices with suppliers, nor promise customers lower prices", zh: "OPC不主动与供应商谈价格，也不向客户承诺能拿到更低价格" },
+        { en: "Must negotiate whenever customer asks", zh: "只要客户要求，就必须去谈" },
+        { en: "Price is a secret between OPC and customer", zh: "价格是OPC和客户之间的秘密" }
+      ],
+      answer: 1,
+      score: 3,
+      explanation: {
+        en: "OPC does not provide price negotiation service with suppliers, because not every supplier can give a lower price. We do not promise things we cannot deliver to customers.",
+        zh: "OPC不提供与供应商谈判价格的服务，因为不是每个供应商都能谈下来，无法做到的事不向客户承诺。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "What is the first step for full container (FCL) procurement?",
+        zh: "整柜采购的第一步应该是？"
+      },
+      options: [
+        { en: "Pay full amount directly", zh: "直接付全款" },
+        { en: "First order samples from multiple suppliers, confirm quality before bulk purchase", zh: "先下多个供应商的样品单，确认样品后再批量采购" },
+        { en: "Arrange sea freight directly", zh: "直接安排海运" },
+        { en: "Sign contract directly", zh: "直接签合同" }
+      ],
+      answer: 1,
+      score: 3,
+      explanation: {
+        en: "FCL involves large quantity and high value. Customers must first order samples to confirm quality and appearance before finalizing suppliers and bulk purchase.",
+        zh: "整柜采购数量大、金额高，必须先让客户下样品单，确认实物质量、外观符合预期后，再确定最终供应商和批量采购。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "If customer requests supplier to ship directly to their international logistics warehouse, what should OPC do?",
+        zh: "客户要求供应商直接发货到自己的国际物流仓库，OPC应该怎么做？"
+      },
+      options: [
+        { en: "Ignore this request", zh: "直接忽略这个要求" },
+        { en: "Fill in third-party warehouse address in PO, and inform HQ procurement of this special case", zh: "在PO地址填写第三方仓库地址，并告知总部采购人员这个特殊情况" },
+        { en: "Tell customer it's not possible", zh: "告诉客户不行" },
+        { en: "Decide whether to tell HQ yourself", zh: "自己决定要不要告诉总部" }
+      ],
+      answer: 1,
+      score: 3,
+      explanation: {
+        en: "If customer needs supplier to ship directly to a third-party logistics warehouse, fill in the third-party address in the PO, and clearly inform HQ procurement of this special case. Otherwise, default shipping address is Lancmall China warehouse.",
+        zh: "如果客户需要供应商直接发货到第三方国际物流仓库，需要在PO地址填写第三方仓库地址，并明确告知总部采购人员这个特殊情况，否则默认寄到Lancmall中国仓库。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "Regarding Lancmall user registration agreement, which of the following is correct?",
+        zh: "关于Lancmall用户注册协议，以下说法正确的是？"
+      },
+      options: [
+        { en: "No need to read, just check the box", zh: "可以不用看，直接勾选就行" },
+        { en: "Must read the agreement carefully. Registering and paying means agreeing to all terms.", zh: "必须仔细阅读协议内容，注册并付款即视为同意协议所有条款" },
+        { en: "The agreement contents are not important", zh: "协议里的内容不重要" },
+        { en: "Agreement is only available in Chinese", zh: "协议只有中文版本" }
+      ],
+      answer: 1,
+      score: 3,
+      explanation: {
+        en: "Customers must carefully read the User Registration Agreement and Privacy Policy. The agreement includes fees, after-sales and other important terms. Registering and paying for orders means agreeing to all terms.",
+        zh: "必须让客户仔细阅读《用户注册协议》和《隐私政策》，协议里包含收费、售后等重要条款，客户注册并付款即视为同意所有协议内容。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "Which payment method is officially supported for OPC?",
+        zh: "以下哪种支付方式是OPC标准支持的？"
+      },
+      options: [
+        { en: "USD bank transfer", zh: "美元银行转账" },
+        { en: "RMB bank transfer", zh: "人民币银行转账" },
+        { en: "Pakistani Rupee (PKR) bank transfer", zh: "巴基斯坦卢比（PKR）银行转账" },
+        { en: "Credit card payment", zh: "信用卡支付" }
+      ],
+      answer: 2,
+      score: 3,
+      explanation: {
+        en: "OPC uniformly uses Pakistani Rupee (PKR) bank transfer. We do not support USD or RMB payment.",
+        zh: "OPC统一使用巴基斯坦卢比（PKR）银行转账，不支持美元或人民币支付。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "During warehouse inspection, how many items can be counted for free before paid counting is required?",
+        zh: "入库检验时，商品数量超过多少个需要付费清点？"
+      },
+      options: [
+        { en: "50 pieces", zh: "50个" },
+        { en: "100 pieces", zh: "100个" },
+        { en: "200 pieces", zh: "200个" },
+        { en: "500 pieces", zh: "500个" }
+      ],
+      answer: 1,
+      score: 3,
+      explanation: {
+        en: "For quantities under 100 pieces, we count one by one for free. Over 100 pieces requires paid counting service.",
+        zh: "入库检验时，商品数量＜100个逐个免费清点；超过100个需要付费清点。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "Which of the following products is very suitable for air shipping?",
+        zh: "以下哪类商品很适合空运？"
+      },
+      options: [
+        { en: "Bulky, lightweight dimensional cargo", zh: "体积大、重量轻的泡货" },
+        { en: "Jewelry, clothing accessories, beauty products", zh: "珠宝首饰、服装配饰、美妆产品" },
+        { en: "Hardware tools", zh: "五金工具" },
+        { en: "Furniture", zh: "家具" }
+      ],
+      answer: 1,
+      score: 3,
+      explanation: {
+        en: "Suitable for air shipping: light small items, high unit value goods (jewelry, watches, clothing, beauty) - light weight, small volume, low shipping cost ratio, and fast delivery.",
+        zh: "适合空运的商品：轻小件、高单价商品（珠宝、手表、服装、美妆），因为重量轻、体积小，运费占比低，且时效快。"
+      }
+    },
+    {
+      type: 'single',
+      question: {
+        en: "What is the core of B2B business?",
+        zh: "2B业务的核心是？"
+      },
+      options: [
+        { en: "Make a lot of money on the first order", zh: "第一次就赚很多钱" },
+        { en: "Customer repurchase rate. If the customer recognizes your service, they will keep ordering.", zh: "客户复购率，只要客户认可服务，会持续不断下单" },
+        { en: "One-time transaction", zh: "一次性交易" },
+        { en: "Charge customers as much as possible", zh: "尽量多收客户钱" }
+      ],
+      answer: 1,
+      score: 3,
+      explanation: {
+        en: "B2B business is all about repurchase rate. If a business customer recognizes you and Lancmall's service, they will keep placing orders. It's much better than offending a customer on the first order.",
+        zh: "2B业务考的是复购率，只要客户认可你和Lancmall的服务，会一直持续不断下单，比第一次就把客户得罪了要划算得多。"
+      }
+    },
+
+    // ===== 多选题 21-25 =====
+    {
+      type: 'multiple',
+      question: {
+        en: "Which of the following fees are included in the PO purchase order?",
+        zh: "PO采购订单中包含以下哪些费用？"
+      },
+      options: [
+        { en: "Product purchase price", zh: "商品采购价格" },
+        { en: "Domestic shipping from supplier to China warehouse", zh: "供应商到中国仓库的国内运费" },
+        { en: "Service fee", zh: "服务费" },
+        { en: "International shipping fee", zh: "国际运输运费" }
+      ],
+      answer: [0, 1, 2],
+      score: 4,
+      explanation: {
+        en: "PO includes: product price, domestic shipping (supplier → China warehouse), service fee. International shipping is NOT included in PO and needs separate payment.",
+        zh: "PO订单包含：商品价格、供应商到中国仓库的国内运费、服务费；国际运输费不包含在PO中，需要单独支付。"
+      }
+    },
+    {
+      type: 'multiple',
+      question: {
+        en: "Which of the following are included in warehouse inspection?",
+        zh: "入库检验包含以下哪些内容？"
+      },
+      options: [
+        { en: "Appearance check (outer packaging intact)", zh: "外观检查（外包装是否完好）" },
+        { en: "Quantity verification", zh: "数量核对" },
+        { en: "Quality and function testing", zh: "质量功能测试" },
+        { en: "Product unboxing inspection", zh: "商品开箱检查" }
+      ],
+      answer: [0, 1],
+      score: 4,
+      explanation: {
+        en: "Warehouse inspection only includes appearance check and quantity verification. It does not include quality/function testing. Quality issues can only be found after customer receives the goods.",
+        zh: "入库检验仅包括外观检查和数量核对，不包含质量功能测试；质量问题需要客户收到货后才能发现。"
+      }
+    },
+    {
+      type: 'multiple',
+      question: {
+        en: "Which of the following products are sensitive goods and not recommended for active promotion?",
+        zh: "以下哪些商品属于敏感货，不建议主动推广？"
+      },
+      options: [
+        { en: "Electronic products", zh: "电子产品" },
+        { en: "Large capacity power banks", zh: "大容量充电宝" },
+        { en: "Toys with batteries", zh: "带电池的玩具" },
+        { en: "Clothing", zh: "服装" }
+      ],
+      answer: [0, 1, 2],
+      score: 4,
+      explanation: {
+        en: "Electronics, large capacity power banks, battery-operated toys are all sensitive goods with high shipping costs and issues. Not recommended for active promotion. Clothing is normal cargo.",
+        zh: "电子产品、大容量充电宝、带电池的玩具都属于敏感货，运费高、容易出问题，不建议主动推广；服装是普通货。"
+      }
+    },
+    {
+      type: 'multiple',
+      question: {
+        en: "Which of the following are correct practices when selecting products?",
+        zh: "选品时，正确的做法包括？"
+      },
+      options: [
+        { en: "Calculate total cost (purchase price + shipping + service fee)", zh: "计算综合成本（采购价+运费+服务费）" },
+        { en: "Choose suppliers with high store ratings and high monthly sales", zh: "选择店铺评分高、月销量高的供应商" },
+        { en: "Start with small trial purchase for new suppliers", zh: "新供应商先小批量试采购" },
+        { en: "Only look for the lowest price", zh: "只看价格最低的" }
+      ],
+      answer: [0, 1, 2],
+      score: 4,
+      explanation: {
+        en: "When selecting products, calculate total cost, choose suppliers with high ratings and sales, and start small with new suppliers. Don't just look for the lowest price - you get what you pay for.",
+        zh: "选品时要计算综合成本，选择评分高、销量高的供应商，新供应商先小批量试错；不能只看价格最低，一分钱一分货。"
+      }
+    },
+    {
+      type: 'multiple',
+      question: {
+        en: "Which of the following are correct steps in the FCL procurement process?",
+        zh: "整柜采购的正确流程包括？"
+      },
+      options: [
+        { en: "First order samples to confirm quality", zh: "先下样品单确认质量" },
+        { en: "Determine shipping plan and trade terms", zh: "确定物流方案和交易方式" },
+        { en: "Issue quotation and sign contract", zh: "出具报价单并签订合同" },
+        { en: "Arrange procurement and shipping after customer pays all fees", zh: "客户支付所有费用后安排采购运输" }
+      ],
+      answer: [0, 1, 2, 3],
+      score: 4,
+      explanation: {
+        en: "FCL procurement process: Sample confirmation → Determine shipping plan → Issue quotation & sign contract → Arrange procurement and shipping → Customer pays fees.",
+        zh: "整柜采购流程：样品确认 → 确定物流方案 → 出具报价签合同 → 安排采购和运输 → 客户支付费用。"
+      }
+    },
+
+    // ===== 判断题 26-35 =====
+    {
+      type: 'truefalse',
+      question: {
+        en: "OPC can negotiate prices with suppliers to get lower purchase prices for customers.",
+        zh: "OPC可以帮客户与供应商谈价格，争取更低的采购价。"
+      },
+      answer: false,
+      score: 2,
+      explanation: {
+        en: "OPC does not provide price negotiation service with suppliers, because not every supplier can give a lower price. We do not promise things we cannot deliver to customers.",
+        zh: "OPC不提供与供应商谈判价格的服务，因为不是每个供应商都能谈下来，无法做到的事不向客户承诺。"
+      }
+    },
+    {
+      type: 'truefalse',
+      question: {
+        en: "After customer pays and confirms the order, it means they agree to all terms in the User Registration Agreement.",
+        zh: "客户付款并确认订单后，就视为同意《用户注册协议》的所有条款。"
+      },
+      answer: true,
+      score: 2,
+      explanation: {
+        en: "Customer registration and payment for an order means they default to agreeing to all contents of the User Registration Agreement, including fees and after-sales terms.",
+        zh: "客户注册并为订单付款，即默认同意《用户注册协议》的所有内容，包括收费、售后等条款。"
+      }
+    },
+    {
+      type: 'truefalse',
+      question: {
+        en: "As long as customer requests, supplier can ship directly to their international logistics warehouse without affecting any services.",
+        zh: "只要客户要求，供应商就可以直接发货到客户指定的国际物流仓库，不影响任何服务。"
+      },
+      answer: false,
+      score: 2,
+      explanation: {
+        en: "If supplier ships directly to a third-party logistics warehouse, goods do not pass through Lancmall China warehouse, so warehouse inspection service cannot be provided. OPC must inform HQ in advance.",
+        zh: "供应商直接发货到第三方物流仓库，货物不经过Lancmall中国仓库，无法提供入库检验服务，OPC必须提前告知总部。"
+      }
+    },
+    {
+      type: 'truefalse',
+      question: {
+        en: "If customer does not raise objections within 48 hours after warehouse inspection, later product issues are the customer/OPC's own responsibility.",
+        zh: "入库后48小时内客户没有提出异议，后期发现商品问题就由客户/OPC自行承担。"
+      },
+      answer: true,
+      score: 2,
+      explanation: {
+        en: "If no objection is raised within 48 hours after warehouse inspection notice, it is deemed that customer has confirmed product appearance, quantity, etc. Later issues are OPC's own responsibility.",
+        zh: "入库信息发出后48小时内未提出异议，默认客户对商品外观、数量等符合预期，后期问题由OPC自行解决。"
+      }
+    },
+    {
+      type: 'truefalse',
+      question: {
+        en: "Power banks of any capacity can be promoted freely.",
+        zh: "充电宝不管多大容量都可以随便推广。"
+      },
+      answer: false,
+      score: 2,
+      explanation: {
+        en: "Power banks over 12000mAh are sensitive goods, require CCC certification, and are not suitable for air shipping. Not recommended for promotion.",
+        zh: "超过12000mAh的充电宝属于敏感货，需要CCC认证，不方便空运，不建议推广。"
+      }
+    },
+    {
+      type: 'truefalse',
+      question: {
+        en: "When selecting products, we should only look at the lowest purchase price, no need to consider shipping cost.",
+        zh: "选品时，只看采购价越低越好，不用考虑运费。"
+      },
+      answer: false,
+      score: 2,
+      explanation: {
+        en: "We must calculate total cost. Some products have low purchase price but high shipping cost (dimensional weight, heavy cargo), resulting in very low profit after calculation.",
+        zh: "必须计算综合成本，有些商品采购价低但是运费高（泡货、重货），算下来利润反而很低。"
+      }
+    },
+    {
+      type: 'truefalse',
+      question: {
+        en: "For new suppliers, it is recommended to start with a small trial purchase to test quality.",
+        zh: "新合作的供应商，建议先小批量采购测试质量。"
+      },
+      answer: true,
+      score: 2,
+      explanation: {
+        en: "Start with a small trial order for new suppliers. Verify quality through warehouse inspection photos. Trial-and-error cost is low, scale up after quality is confirmed.",
+        zh: "新供应商先小批量试采购，通过入库检查照片验证质量，试错成本低，确认没问题再加大采购量。"
+      }
+    },
+    {
+      type: 'truefalse',
+      question: {
+        en: "Higher ROAS means better ad performance.",
+        zh: "ROAS越高，说明广告投放效果越好。"
+      },
+      answer: true,
+      score: 2,
+      explanation: {
+        en: "ROAS = Revenue from ads ÷ Ad spend. Higher ROAS means more revenue generated per yuan spent on ads, better performance.",
+        zh: "ROAS = 广告带来的收入 ÷ 广告花费，ROAS越高说明每一块钱广告带来的收入越多，效果越好。"
+      }
+    },
+    {
+      type: 'truefalse',
+      question: {
+        en: "It's fine to reply to after-sales issues within 72 hours.",
+        zh: "客户反馈售后问题后，72小时内回复就行。"
+      },
+      answer: false,
+      score: 2,
+      explanation: {
+        en: "After-sales issues must be responded to within 24 hours. First calm the customer, then follow up. Cannot delay to 72 hours.",
+        zh: "售后问题必须在24小时内响应，先安抚客户，再跟进处理，不能拖到72小时。"
+      }
+    },
+    {
+      type: 'truefalse',
+      question: {
+        en: "The comprehensive final test score accounts for 60% of the final total score.",
+        zh: "综合测试成绩占最终总分的60%。"
+      },
+      answer: true,
+      score: 2,
+      explanation: {
+        en: "Total score = (Day1 + Day2 + Day3) / 3 × 40% + Final test × 60%. Score ≥ 80 means training passed and ready for incubation phase.",
+        zh: "总分数 =（Day1 + Day2 + Day3）/ 3 × 40% + 综合测试 × 60%，80分以上视为培训合格。"
+      }
+    }
+  ]
 };
 
 // Current quiz
