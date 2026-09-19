@@ -3316,6 +3316,9 @@ function adminLogin() {
   }
 }
 
+// Global variable to store results from Supabase
+let supabaseResults = [];
+
 // Load results from Supabase
 async function loadResultsFromSupabase() {
   try {
@@ -3331,14 +3334,15 @@ async function loadResultsFromSupabase() {
     if (!response.ok) {
       const errorText = await response.text();
       console.error('Supabase load error:', response.status, errorText);
-      renderAdminDashboard(JSON.parse(localStorage.getItem('opc_quiz_results') || '[]'));
+      supabaseResults = JSON.parse(localStorage.getItem('opc_quiz_results') || '[]');
+      renderAdminDashboard(supabaseResults);
       return;
     }
     
     const data = await response.json();
     
     // Convert Supabase data to match localStorage format
-    const results = data.map(r => ({
+    supabaseResults = data.map(r => ({
       id: r.shipping_mark,
       quizId: r.quiz_id,
       score: r.score,
@@ -3351,10 +3355,11 @@ async function loadResultsFromSupabase() {
       moduleStats: r.module_stats
     }));
     
-    renderAdminDashboard(results);
+    renderAdminDashboard(supabaseResults);
   } catch (error) {
     console.error('Exception loading results:', error);
-    renderAdminDashboard(JSON.parse(localStorage.getItem('opc_quiz_results') || '[]'));
+    supabaseResults = JSON.parse(localStorage.getItem('opc_quiz_results') || '[]');
+    renderAdminDashboard(supabaseResults);
   }
 }
 
@@ -3592,7 +3597,7 @@ function showUserAnalysis(userId) {
   currentAnalysisUserId = userId;
   currentAnalysisQuiz = null;
   
-  const results = JSON.parse(localStorage.getItem('opc_quiz_results') || '[]');
+  const results = supabaseResults.length > 0 ? supabaseResults : JSON.parse(localStorage.getItem('opc_quiz_results') || '[]');
   const userResults = results.filter(r => r.id === userId);
   
   if (userResults.length === 0) {
